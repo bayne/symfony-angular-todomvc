@@ -1,0 +1,20 @@
+todo:
+  list:
+    link: back to todo list
+    headline: Available todos
+    empty: No todos found
+  new:
+    link: create new todo
+    headline: Create new todo
+    submit: add todo
+  edit:
+    link: edit
+    headline: Edit todo %id%
+    submit: update todo
+  remove:
+    link: remove
+  offset: offset
+  limit: limit
+api:
+  doc:
+    link: API documentation

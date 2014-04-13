@@ -1,0 +1,21 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+{% block title "Symfony - Todos" %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1 class="title">{{ 'todo.new.headline'|trans({}, 'AcmeDemoBundle') }}</h1>
+
+    {%  if (form is defined) %}
+    <form action="{{ url('post_todos') }}" method="POST" {{ form_enctype(form) }}>
+
+        {{ form_widget(form) }}
+
+        <input type="submit" value="{% trans from 'AcmeDemoBundle' %}todo.new.submit{% endtrans %}">
+    </form>
+    {% endif %}
+
+{% endblock %}
+
+{% set code = code(_self) %}

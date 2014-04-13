@@ -1,0 +1,18 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+{% block title "Symfony - Todo" %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1 class="title">Todo #{{ id }}</h1>
+
+    <p>{{ todo }}</p>
+    <p>
+        <a href="{{ path('get_todos') }}">{{ 'todo.list.link'|trans({}, 'AcmeDemoBundle') }}</a> <br>
+        [<a href="{{ path('remove_todos', {'id': id}) }}">{{ 'todo.remove.link'|trans({}, 'AcmeDemoBundle') }}</a>]
+        [<a href="{{ path('edit_todos', {'id': id}) }}">{{ 'todo.edit.link'|trans({}, 'AcmeDemoBundle') }}</a>]
+    </p>
+{% endblock %}
+
+{% set code = code(_self) %}

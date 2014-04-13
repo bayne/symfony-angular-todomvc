@@ -1,0 +1,35 @@
+Acme\DemoBundle\Model\Todo:
+  exclusion_policy: ALL
+  xml_root_name: todo
+  properties:
+    title:
+      expose: true
+      type: string
+      groups: [standard, restapi]
+    secret:
+      expose: false
+      type: string
+      groups: [restapi]
+    completed:
+      expose: true
+      type: boolean
+      groups: [standard, restapi]
+    id:
+      expose: false
+      type: integer
+      groups: [restapi]
+  relations:
+    -
+      rel: self
+      href:
+        route: get_todo
+        parameters:
+          id: expr(object.id)
+        absolute: true
+    -
+      rel: expr(object.getAssociatedEventsRel())
+      embed:
+        content: expr(object.getAssociatedEvents())
+        xmlElementName: events
+        exclusion:
+          exclude_if: expr(object.id === 0)

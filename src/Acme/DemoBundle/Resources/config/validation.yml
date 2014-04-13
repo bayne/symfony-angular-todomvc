@@ -1,0 +1,4 @@
+Acme\DemoBundle\Model\Todo:
+    properties:
+        title:
+            - NotBlank: ~
