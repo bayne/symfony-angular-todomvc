@@ -1,0 +1,14 @@
+{
+  "name": "Symfony Angular Todomvc",
+  "description": "An implementation of TodoMVC using AngularJS and Symfony REST Edition",
+  "repository": "https://github.com/bayne/symfony-angular-todomvc",
+  "keywords": [
+    "angularjs",
+    "symfony2",
+    "symfony",
+    "rest",
+    "restangular",
+    "todomvc"
+  ],
+  "env": {}
+}
