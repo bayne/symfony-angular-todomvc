@@ -1,4 +1,5 @@
-Symfony Angular TodoMVC
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/bayne/symfony-angular-todomvc)
+Symfony Angular TodoMVC 
 ========================
 
 This project is a combination of the [Symfony REST edition](https://github.com/gimler/symfony-rest-edition) project and [AngularJS](http://angularjs.org/)+[Restangular](https://github.com/mgonto/restangular) to create an implementation
@@ -14,6 +15,10 @@ Essentially:
 ```bash
 $ composer.phar install
 ```
+
+Or click this:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/bayne/symfony-angular-todomvc)
 
 Usage
 --------------------------------
