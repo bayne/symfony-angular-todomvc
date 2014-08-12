@@ -19,6 +19,9 @@ class Todo
      */
     public $title;
 
+    /**
+     * @var boolean Whether the todo is marked as completed or not
+     */
     public $completed;
 
     /**
