@@ -6,3 +6,8 @@ NelmioApiDocBundle:
   resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
   prefix:   /api/doc
 
+ng-static:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    'AcmeDemoBundle::index.html.twig'
