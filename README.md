@@ -1,4 +1,4 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/bayne/symfony-angular-todomvc)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 Symfony Angular TodoMVC 
 ========================
 
@@ -18,7 +18,7 @@ $ composer.phar install
 
 Or click this:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/bayne/symfony-angular-todomvc)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 Usage
 --------------------------------

@@ -10,5 +10,8 @@
     "restangular",
     "todomvc"
   ],
-  "env": {}
+  "success_url": "/index.html",
+  "env": {
+    "BUILDPACK_URL": "https://github.com/CHH/heroku-buildpack-php"
+  }
 }
