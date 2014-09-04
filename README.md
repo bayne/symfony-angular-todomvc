@@ -32,7 +32,7 @@ $ php app/console server:run localhost:8080
 Navigate your browser to the TodoMVC client
 
 ```bash
-http://localhost:8080/TodoMVC/#/
+http://localhost:8080/todo
 ```
 
 Or browse through the Rest API
