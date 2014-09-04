@@ -6,4 +6,5 @@
 /bin/
 /composer.phar
 /web/bower_components
-
+node_modules/
+web/bower_components
