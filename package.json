@@ -1,0 +1,6 @@
+{
+  "name": "bayne-symfony-angular-todomvc",
+  "dependencies": {
+    "bower": "1.3.*"
+  }
+}

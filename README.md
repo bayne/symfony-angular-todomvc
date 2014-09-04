@@ -1,4 +1,4 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/bayne/symfony-angular-todomvc)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 Symfony Angular TodoMVC 
 ========================
 
@@ -18,7 +18,7 @@ $ composer.phar install
 
 Or click this:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/bayne/symfony-angular-todomvc)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 Usage
 --------------------------------
@@ -32,7 +32,7 @@ $ php app/console server:run localhost:8080
 Navigate your browser to the TodoMVC client
 
 ```bash
-http://localhost:8080/TodoMVC/#/
+http://localhost:8080/todo
 ```
 
 Or browse through the Rest API

@@ -51,6 +51,12 @@
         "symfony-web-dir": "web",
         "branch-alias": {
             "dev-master": "2.3-dev"
+        },
+        "heroku": {
+            "framework": "symfony2",
+            "compile": [
+                "cd web; ./../node_modules/.bin/bower install"
+            ]
         }
     }
 }
