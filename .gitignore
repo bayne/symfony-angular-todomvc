@@ -5,4 +5,5 @@
 /vendor/
 /bin/
 /composer.phar
-.idea
+/web/bower_components
+
