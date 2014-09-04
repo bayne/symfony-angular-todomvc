@@ -19,6 +19,9 @@ angular.module('todomvc', ['ngRoute', 'restangular'])
       redirectTo: '/'
     });
   })
+  .config(function($interpolateProvider) {
+        $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+  })
   .config(['RestangularProvider', function (RestangularProvider) {
     RestangularProvider.setBaseUrl('/app_dev.php/');
     RestangularProvider.setResponseExtractor(function(response, operation, what, url) {

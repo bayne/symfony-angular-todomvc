@@ -7,7 +7,7 @@ NelmioApiDocBundle:
   prefix:   /api/doc
 
 ng-static:
-    path: /
+    path: /todo
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    'AcmeDemoBundle::index.html.twig'
