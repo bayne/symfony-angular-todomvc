@@ -34,12 +34,14 @@
         "post-install-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "cd web/TodoMVC && (bower install || ./../../node_modules/.bin/bower install)"
         ],
         "post-update-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "cd web/TodoMVC && (bower install || ./../../node_modules/.bin/bower install)"
         ]
     },
     "config": {
@@ -53,10 +55,7 @@
             "dev-master": "2.3-dev"
         },
         "heroku": {
-            "framework": "symfony2",
-            "compile": [
-                "cd web; ./../node_modules/.bin/bower install"
-            ]
+            "framework": "symfony2"
         }
     }
 }

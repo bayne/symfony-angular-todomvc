@@ -5,6 +5,5 @@
 /vendor/
 /bin/
 /composer.phar
-/web/bower_components
-node_modules/
-web/bower_components
+/web/TodoMVC/bower_components
+/node_modules/

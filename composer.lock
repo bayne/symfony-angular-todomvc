@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "b6eb9d9521bae57677610b21962c2f47",
+    "hash": "8ac631482fc7b741edced27d434d760f",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2478,22 +2479,17 @@
             "time": "2014-01-05 03:58:50"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "jms/serializer-bundle": 20,
         "friendsofsymfony/rest-bundle": 20,
         "dunglas/angular-csrf-bundle": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
