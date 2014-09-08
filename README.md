@@ -16,6 +16,13 @@ Essentially:
 $ composer.phar install
 ```
 
+Then:
+
+```bash
+$ cd web 
+$ bower install
+```
+
 Or click this:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
