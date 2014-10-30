@@ -26,18 +26,21 @@
         "hautelook/templated-uri-bundle": "~1.0",
         "willdurand/rest-extra-bundle": "~1.0",
         "dunglas/angular-csrf-bundle": "dev-master",
-        "sp/bower-bundle": "0.12.*@dev"
+        "sp/bower-bundle": "0.12.*@dev",
+        "incenteev/composer-parameter-handler": "~2.1@dev"
     },
     "conflict": {
         "symfony/routing": "2.4.1"
     },
     "scripts": {
         "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
         "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
@@ -48,6 +51,9 @@
     },
     "minimum-stability": "dev",
     "extra": {
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "branch-alias": {
