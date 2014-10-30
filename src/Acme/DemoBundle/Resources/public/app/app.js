@@ -23,7 +23,7 @@ angular.module('todomvc', ['ngRoute', 'restangular'])
         $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
   })
   .config(['RestangularProvider', function (RestangularProvider) {
-    RestangularProvider.setBaseUrl('/app_dev.php/');
+    RestangularProvider.setBaseUrl('/');
     RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
       if (operation == 'getList') {
         return _.toArray(response[what]);

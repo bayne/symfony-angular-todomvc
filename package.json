@@ -1,6 +1,0 @@
-{
-  "name": "symfony-angular-todomvc",
-  "dependencies": {
-    "bower": "1.3.*"
-  }
-}

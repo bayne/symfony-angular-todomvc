@@ -1,3 +1,7 @@
+/web/js/*_*.js
+/web/css/*_*.css
+/web/assetic/*
+
 /web/bundles/
 /app/cache/*
 /app/logs/*
@@ -5,5 +9,3 @@
 /vendor/
 /bin/
 /composer.phar
-/web/TodoMVC/bower_components
-/node_modules/

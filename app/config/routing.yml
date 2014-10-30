@@ -2,6 +2,12 @@ _api:
     resource: "@AcmeDemoBundle/Controller/TodoController.php"
     type:     rest
 
+_front:
+    path: /TodoMVC
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'AcmeDemoBundle::front.html.twig'
+
 NelmioApiDocBundle:
   resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
   prefix:   /api/doc

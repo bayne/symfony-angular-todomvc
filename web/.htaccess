@@ -1,153 +1,48 @@
-# skip "real" requests
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule .* - [QSA,L]
+# Use the front controller as index file. It serves as fallback solution when
+# every other rewrite/redirect fails (e.g. in an aliased environment without
+# mod_rewrite). Additionally, this reduces the matching process for the
+# startpage (path "/") because otherwise Apache will apply the rewritting rules
+# to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
+DirectoryIndex app.php
 
-# _welcome
-RewriteCond %{REQUEST_URI} ^/$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_welcome,E=_ROUTING_default__controller:Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController\:\:redirectAction,E=_ROUTING_default_route:get_todos,E=_ROUTING_default_permanent:1]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
 
-# _wdt
-RewriteCond %{REQUEST_URI} ^/_wdt/([^/]++)$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_wdt,E=_ROUTING_param_token:%1,E=_ROUTING_default__controller:web_profiler.controller.profiler\:toolbarAction]
+    # Redirect to URI without front controller to prevent duplicate content
+    # (with and without `/app.php`). Only do this redirect on the initial
+    # rewrite by Apache and not on subsequent cycles. Otherwise we would get an
+    # endless redirect loop (request -> rewrite to front controller ->
+    # redirect -> request -> ...).
+    # So in case you get a "too many redirects" error or you always get redirected
+    # to the startpage because your Apache does not expose the REDIRECT_STATUS
+    # environment variable, you have 2 choices:
+    # - disable this feature by commenting the following 2 lines or
+    # - use Apache >= 2.3.9 and replace all L flags by END flags and remove the
+    #   following RewriteCond (best solution)
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^app\.php(/(.*)|$) %{CONTEXT_PREFIX}/$2 [R=301,L]
 
-# _profiler_home
-RewriteCond %{REQUEST_URI} ^/_profiler$
-RewriteRule .* $0/ [QSA,L,R=301]
-RewriteCond %{REQUEST_URI} ^/_profiler/$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_home,E=_ROUTING_default__controller:web_profiler.controller.profiler\:homeAction]
+    # If the requested filename exists, simply serve it.
+    # We only want to let Apache serve files and not directories.
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule .? - [L]
 
-# _profiler_search
-RewriteCond %{REQUEST_URI} ^/_profiler/search$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_search,E=_ROUTING_default__controller:web_profiler.controller.profiler\:searchAction]
+    # The following rewrites all other queries to the front controller. The
+    # condition ensures that if you are using Apache aliases to do mass virtual
+    # hosting, the base path will be prepended to allow proper resolution of the
+    # app.php file; it will work in non-aliased environments as well, providing
+    # a safe, one-size fits all solution.
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+    RewriteRule .? %{ENV:BASE}app.php [L]
+</IfModule>
 
-# _profiler_search_bar
-RewriteCond %{REQUEST_URI} ^/_profiler/search_bar$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_search_bar,E=_ROUTING_default__controller:web_profiler.controller.profiler\:searchBarAction]
-
-# _profiler_purge
-RewriteCond %{REQUEST_URI} ^/_profiler/purge$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_purge,E=_ROUTING_default__controller:web_profiler.controller.profiler\:purgeAction]
-
-# _profiler_info
-RewriteCond %{REQUEST_URI} ^/_profiler/info/([^/]++)$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_info,E=_ROUTING_param_about:%1,E=_ROUTING_default__controller:web_profiler.controller.profiler\:infoAction]
-
-# _profiler_import
-RewriteCond %{REQUEST_URI} ^/_profiler/import$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_import,E=_ROUTING_default__controller:web_profiler.controller.profiler\:importAction]
-
-# _profiler_export
-RewriteCond %{REQUEST_URI} ^/_profiler/export/([^/\.]++)\.txt$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_export,E=_ROUTING_param_token:%1,E=_ROUTING_default__controller:web_profiler.controller.profiler\:exportAction]
-
-# _profiler_phpinfo
-RewriteCond %{REQUEST_URI} ^/_profiler/phpinfo$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_phpinfo,E=_ROUTING_default__controller:web_profiler.controller.profiler\:phpinfoAction]
-
-# _profiler_search_results
-RewriteCond %{REQUEST_URI} ^/_profiler/([^/]++)/search/results$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_search_results,E=_ROUTING_param_token:%1,E=_ROUTING_default__controller:web_profiler.controller.profiler\:searchResultsAction]
-
-# _profiler
-RewriteCond %{REQUEST_URI} ^/_profiler/([^/]++)$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler,E=_ROUTING_param_token:%1,E=_ROUTING_default__controller:web_profiler.controller.profiler\:panelAction]
-
-# _profiler_router
-RewriteCond %{REQUEST_URI} ^/_profiler/([^/]++)/router$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_router,E=_ROUTING_param_token:%1,E=_ROUTING_default__controller:web_profiler.controller.router\:panelAction]
-
-# _profiler_exception
-RewriteCond %{REQUEST_URI} ^/_profiler/([^/]++)/exception$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_exception,E=_ROUTING_param_token:%1,E=_ROUTING_default__controller:web_profiler.controller.exception\:showAction]
-
-# _profiler_exception_css
-RewriteCond %{REQUEST_URI} ^/_profiler/([^/]++)/exception\.css$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_profiler_exception_css,E=_ROUTING_param_token:%1,E=_ROUTING_default__controller:web_profiler.controller.exception\:cssAction]
-
-# _configurator_home
-RewriteCond %{REQUEST_URI} ^/_configurator$
-RewriteRule .* $0/ [QSA,L,R=301]
-RewriteCond %{REQUEST_URI} ^/_configurator/$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_configurator_home,E=_ROUTING_default__controller:Sensio\\Bundle\\DistributionBundle\\Controller\\ConfiguratorController\:\:checkAction]
-
-# _configurator_step
-RewriteCond %{REQUEST_URI} ^/_configurator/step/([^/]++)$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_configurator_step,E=_ROUTING_param_index:%1,E=_ROUTING_default__controller:Sensio\\Bundle\\DistributionBundle\\Controller\\ConfiguratorController\:\:stepAction]
-
-# _configurator_final
-RewriteCond %{REQUEST_URI} ^/_configurator/final$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:_configurator_final,E=_ROUTING_default__controller:Sensio\\Bundle\\DistributionBundle\\Controller\\ConfiguratorController\:\:finalAction]
-
-# new_todo
-RewriteCond %{REQUEST_URI} ^/todos/new(?:\.(xml|json|html))?$
-RewriteCond %{REQUEST_METHOD} !^(GET|HEAD)$ [NC]
-RewriteRule .* - [S=1,E=_ROUTING_allow_GET:1,E=_ROUTING_allow_HEAD:1]
-RewriteCond %{REQUEST_URI} ^/todos/new(?:\.(xml|json|html))?$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:new_todo,E=_ROUTING_param__format:%1,E=_ROUTING_default__controller:Acme\\DemoBundle\\Controller\\TodoController\:\:newTodoAction,E=_ROUTING_default__format:]
-
-# edit_todos
-RewriteCond %{REQUEST_URI} ^/todos/([^/]++)/edit(?:\.(xml|json|html))?$
-RewriteCond %{REQUEST_METHOD} !^(GET|HEAD)$ [NC]
-RewriteRule .* - [S=1,E=_ROUTING_allow_GET:1,E=_ROUTING_allow_HEAD:1]
-RewriteCond %{REQUEST_URI} ^/todos/([^/]++)/edit(?:\.(xml|json|html))?$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:edit_todos,E=_ROUTING_param_id:%1,E=_ROUTING_param__format:%2,E=_ROUTING_default__controller:Acme\\DemoBundle\\Controller\\TodoController\:\:editTodosAction,E=_ROUTING_default__format:]
-
-# remove_todos
-RewriteCond %{REQUEST_URI} ^/todos/([^/]++)/remove(?:\.(xml|json|html))?$
-RewriteCond %{REQUEST_METHOD} !^(GET|HEAD)$ [NC]
-RewriteRule .* - [S=1,E=_ROUTING_allow_GET:1,E=_ROUTING_allow_HEAD:1]
-RewriteCond %{REQUEST_URI} ^/todos/([^/]++)/remove(?:\.(xml|json|html))?$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:remove_todos,E=_ROUTING_param_id:%1,E=_ROUTING_param__format:%2,E=_ROUTING_default__controller:Acme\\DemoBundle\\Controller\\TodoController\:\:removeTodosAction,E=_ROUTING_default__format:]
-
-# get_todos
-RewriteCond %{REQUEST_URI} ^/todos(?:\.(xml|json|html))?$
-RewriteCond %{REQUEST_METHOD} !^(GET|HEAD)$ [NC]
-RewriteRule .* - [S=1,E=_ROUTING_allow_GET:1,E=_ROUTING_allow_HEAD:1]
-RewriteCond %{REQUEST_URI} ^/todos(?:\.(xml|json|html))?$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:get_todos,E=_ROUTING_param__format:%1,E=_ROUTING_default__controller:Acme\\DemoBundle\\Controller\\TodoController\:\:getTodosAction,E=_ROUTING_default__format:]
-
-# get_todo
-RewriteCond %{REQUEST_URI} ^/todos/([^/\.]++)(?:\.(xml|json|html))?$
-RewriteCond %{REQUEST_METHOD} !^(GET|HEAD)$ [NC]
-RewriteRule .* - [S=1,E=_ROUTING_allow_GET:1,E=_ROUTING_allow_HEAD:1]
-RewriteCond %{REQUEST_URI} ^/todos/([^/\.]++)(?:\.(xml|json|html))?$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:get_todo,E=_ROUTING_param_id:%1,E=_ROUTING_param__format:%2,E=_ROUTING_default__controller:Acme\\DemoBundle\\Controller\\TodoController\:\:getTodoAction,E=_ROUTING_default__format:]
-
-# post_todos
-RewriteCond %{REQUEST_URI} ^/todos(?:\.(xml|json|html))?$
-RewriteCond %{REQUEST_METHOD} !^(POST)$ [NC]
-RewriteRule .* - [S=1,E=_ROUTING_allow_POST:1]
-RewriteCond %{REQUEST_URI} ^/todos(?:\.(xml|json|html))?$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:post_todos,E=_ROUTING_param__format:%1,E=_ROUTING_default__controller:Acme\\DemoBundle\\Controller\\TodoController\:\:postTodosAction,E=_ROUTING_default__format:]
-
-# put_todos
-RewriteCond %{REQUEST_URI} ^/todos/([^/\.]++)(?:\.(xml|json|html))?$
-RewriteCond %{REQUEST_METHOD} !^(PUT)$ [NC]
-RewriteRule .* - [S=1,E=_ROUTING_allow_PUT:1]
-RewriteCond %{REQUEST_URI} ^/todos/([^/\.]++)(?:\.(xml|json|html))?$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:put_todos,E=_ROUTING_param_id:%1,E=_ROUTING_param__format:%2,E=_ROUTING_default__controller:Acme\\DemoBundle\\Controller\\TodoController\:\:putTodosAction,E=_ROUTING_default__format:]
-
-# delete_todos
-RewriteCond %{REQUEST_URI} ^/todos/([^/\.]++)(?:\.(xml|json|html))?$
-RewriteCond %{REQUEST_METHOD} !^(DELETE)$ [NC]
-RewriteRule .* - [S=1,E=_ROUTING_allow_DELETE:1]
-RewriteCond %{REQUEST_URI} ^/todos/([^/\.]++)(?:\.(xml|json|html))?$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:delete_todos,E=_ROUTING_param_id:%1,E=_ROUTING_param__format:%2,E=_ROUTING_default__controller:Acme\\DemoBundle\\Controller\\TodoController\:\:deleteTodosAction,E=_ROUTING_default__format:]
-
-# nelmio_api_doc_index
-RewriteCond %{REQUEST_URI} ^/api/doc/$
-RewriteCond %{REQUEST_METHOD} !^(GET|HEAD)$ [NC]
-RewriteRule .* - [S=2,E=_ROUTING_allow_GET:1,E=_ROUTING_allow_HEAD:1]
-RewriteCond %{REQUEST_URI} ^/api/doc$
-RewriteRule .* $0/ [QSA,L,R=301]
-RewriteCond %{REQUEST_URI} ^/api/doc/$
-RewriteRule .* app.php [QSA,L,E=_ROUTING_route:nelmio_api_doc_index,E=_ROUTING_default__controller:Nelmio\\ApiDocBundle\\Controller\\ApiDocController\:\:indexAction]
-
-# 405 Method Not Allowed
-RewriteCond %{ENV:_ROUTING__allow_GET} =1 [OR]
-RewriteCond %{ENV:_ROUTING__allow_POST} =1 [OR]
-RewriteCond %{ENV:_ROUTING__allow_PUT} =1 [OR]
-RewriteCond %{ENV:_ROUTING__allow_DELETE} =1 [OR]
-RewriteCond %{ENV:_ROUTING__allow_HEAD} =1
-RewriteRule .* app.php [QSA,L]
-
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        # When mod_rewrite is not available, we instruct a temporary redirect of
+        # the startpage to the front controller explicitly so that the website
+        # and the generated links can still be used.
+        RedirectMatch 302 ^/$ /app.php/
+        # RedirectTemp cannot be used instead
+    </IfModule>
+</IfModule>

@@ -25,5 +25,9 @@ monolog:
 assetic:
     use_controller: true
 
+sp_bower:
+    bundles:
+        AcmeDemoBundle: ~
+
 #swiftmailer:
 #    delivery_address: me@example.com

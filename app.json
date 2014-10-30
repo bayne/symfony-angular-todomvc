@@ -10,5 +10,5 @@
     "restangular",
     "todomvc"
   ],
-  "success_url": "/TodoMVC/#/"
+  "success_url": "/TodoMVC#/"
 }
