@@ -19,8 +19,7 @@ $ composer.phar install
 Then:
 
 ```bash
-$ cd web 
-$ bower install
+$ php app/console sp:bower:install
 ```
 
 Or click this:
