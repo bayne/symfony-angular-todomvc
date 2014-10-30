@@ -26,18 +26,26 @@
         "hautelook/templated-uri-bundle": "~1.0",
         "willdurand/rest-extra-bundle": "~1.0",
         "dunglas/angular-csrf-bundle": "dev-master",
-        "sp/bower-bundle": "0.12.*@dev"
+        "sp/bower-bundle": "0.12.*@dev",
+        "incenteev/composer-parameter-handler": "~2.1@dev",
+        "ext-pdo": "*",
+        "ext-pdo_pgsql": "*"
     },
     "conflict": {
         "symfony/routing": "2.4.1"
     },
     "scripts": {
+        "pre-install-cmd": [
+            "Acme\\DemoBundle\\HerokuDatabase::populateEnvironment"
+        ],
         "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
         "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
@@ -48,6 +56,16 @@
     },
     "minimum-stability": "dev",
     "extra": {
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml",
+            "env-map": {
+              "database_host": "DATABASE_HOST",
+              "database_port": "DATABASE_PORT",
+              "database_name": "DATABASE_NAME",
+              "database_user": "DATABASE_USER",
+              "database_password": "DATABASE_PASSWORD"
+            }
+        },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "branch-alias": {

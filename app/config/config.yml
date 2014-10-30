@@ -51,7 +51,6 @@ doctrine:
         charset:  UTF8
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: %kernel.root_dir%/data/data.db3
-        # path:     %database_path%
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
@@ -71,6 +70,8 @@ sensio_framework_extra:
 fos_rest:
     disable_csrf_role: ROLE_API
     param_fetcher_listener: true
+    service:
+        serializer: serializer
     view:
         view_response_listener: 'force'
         formats:

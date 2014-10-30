@@ -19,7 +19,7 @@ class TodoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'         => 'Acme\DemoBundle\Model\Todo',
+            'data_class'         => 'Acme\DemoBundle\Entity\Todo',
             'intention'          => 'todo',
             'translation_domain' => 'AcmeDemoBundle'
         ));

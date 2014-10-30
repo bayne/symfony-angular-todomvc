@@ -5,9 +5,9 @@
 {% block content_header '' %}
 
 {% block content %}
-    <h1 class="title">{{ 'todo.edit.headline'|trans({'%id%': id}, 'AcmeDemoBundle') }}</h1>
+    <h1 class="title">{{ 'todo.edit.headline'|trans({'%id%': form.vars.data.id}, 'AcmeDemoBundle') }}</h1>
 
-    <form action="{{ url('put_todos', {'id': id}) }}" method="POST" {{ form_enctype(form) }}>
+    <form action="{{ url('put_todos', {'id': form.vars.data.id}) }}" method="POST" {{ form_enctype(form) }}>
         <input type="hidden" name="_method" value="put" />
 
         {{ form_widget(form) }}

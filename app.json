@@ -10,5 +10,11 @@
     "restangular",
     "todomvc"
   ],
-  "success_url": "/TodoMVC#/"
+  "success_url": "/TodoMVC#/",
+  "scripts": {
+    "postdeploy": "php app/console doctrine:schema:create"
+  },
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ]
 }

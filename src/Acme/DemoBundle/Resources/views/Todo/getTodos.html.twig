@@ -7,16 +7,12 @@
 {% block content %}
     <h1 class="title">{{ 'todo.list.headline'|trans({}, 'AcmeDemoBundle') }}</h1>
 
-    <p>
-        {{ 'todo.offset'|trans({}, 'AcmeDemoBundle') }}: {{ data.offset ?: '-' }}, {{ 'todo.limit'|trans({}, 'AcmeDemoBundle') }}: {{ data.limit }}
-    </p>
-
     <ul id="todo-list">
-        {% for id, todo in data.todos %}
+        {% for todo in todos %}
         <li>
-            <a href="{{ path('get_todo', {'id': id}) }}">{{ todo }}</a>
-            [<a href="{{ path('edit_todos', {'id': id}) }}">{{ 'todo.edit.link'|trans({}, 'AcmeDemoBundle') }}</a>]
-            [<a href="{{ path('remove_todos', {'id': id}) }}">{{ 'todo.remove.link'|trans({}, 'AcmeDemoBundle') }}</a>]
+            <a href="{{ path('get_todo', {'id': todo.id}) }}">{{ todo }}</a>
+            [<a href="{{ path('edit_todos', {'id': todo.id}) }}">{{ 'todo.edit.link'|trans({}, 'AcmeDemoBundle') }}</a>]
+            [<a href="{{ path('remove_todos', {'id': todo.id}) }}">{{ 'todo.remove.link'|trans({}, 'AcmeDemoBundle') }}</a>]
         </li>
         {% else %}
         <li>{{ 'todo.list.empty'|trans({}, 'AcmeDemoBundle') }}</li>
