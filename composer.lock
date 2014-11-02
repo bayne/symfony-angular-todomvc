@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7f528fee4e5b6917229835efaf6ea373",
+    "hash": "af9fbfc29dae3bc3461f64e19fdb56f6",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2086,12 +2086,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "d9131014f599e34e42f751ab546efd2fa2ca3b32"
+                "reference": "add32ce6b912a70c1e9acc4ec8db3283585c7088"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/d9131014f599e34e42f751ab546efd2fa2ca3b32",
-                "reference": "d9131014f599e34e42f751ab546efd2fa2ca3b32",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/add32ce6b912a70c1e9acc4ec8db3283585c7088",
+                "reference": "add32ce6b912a70c1e9acc4ec8db3283585c7088",
                 "shasum": ""
             },
             "require": {
@@ -2194,7 +2194,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-10-28 15:57:53"
+            "time": "2014-11-02 01:24:26"
         },
         {
             "name": "twig/extensions",
@@ -2572,9 +2572,7 @@
     },
     "prefer-stable": false,
     "platform": {
-        "php": ">=5.3.3",
-        "ext-pdo": "*",
-        "ext-pdo_pgsql": "*"
+        "php": ">=5.3.3"
     },
     "platform-dev": []
 }

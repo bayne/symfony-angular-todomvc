@@ -27,9 +27,7 @@
         "willdurand/rest-extra-bundle": "~1.0",
         "dunglas/angular-csrf-bundle": "dev-master",
         "sp/bower-bundle": "0.12.*@dev",
-        "incenteev/composer-parameter-handler": "~2.1@dev",
-        "ext-pdo": "*",
-        "ext-pdo_pgsql": "*"
+        "incenteev/composer-parameter-handler": "~2.1@dev"
     },
     "conflict": {
         "symfony/routing": "2.4.1"
