@@ -7,27 +7,27 @@
         "psr-0": { "": "src/" }
     },
     "require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "~2.3",
-        "symfony/icu": "1.0.*",
-        "doctrine/orm": "~2.2,>=2.2.3",
-        "doctrine/doctrine-bundle": "1.2.*",
-        "twig/extensions": "1.0.*",
-        "symfony/assetic-bundle": "2.3.*",
-        "symfony/swiftmailer-bundle": "2.3.*",
-        "symfony/monolog-bundle": "~2.3",
-        "sensio/distribution-bundle": "2.3.*",
-        "sensio/framework-extra-bundle": "2.3.*",
-        "sensio/generator-bundle": "2.3.*",
-        "jms/serializer-bundle": "dev-master",
-        "friendsofsymfony/rest-bundle": "1.2.*@dev",
-        "nelmio/api-doc-bundle": "~2.4",
-        "willdurand/hateoas-bundle": "0.2.*",
-        "hautelook/templated-uri-bundle": "~1.0",
+        "php": ">=5.3.3,<5.7",
+        "symfony/symfony": "~2.7",
+        "doctrine/orm": "~2.5",
+        "doctrine/doctrine-bundle": "~1.5",
+        "twig/extensions": "~1.2",
+        "symfony/assetic-bundle": "~2.6",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.7",
+        "sensio/distribution-bundle": "~4.0",
+        "sensio/framework-extra-bundle": "~3.0",
+        "sensio/generator-bundle": "~2.5",
+        "jms/serializer-bundle": "~1.0",
+        "friendsofsymfony/rest-bundle": "~1.7",
+        "nelmio/api-doc-bundle": "~2.9",
+        "willdurand/hateoas-bundle": "~1.0",
+        "hautelook/templated-uri-bundle": "~2.0",
         "willdurand/rest-extra-bundle": "~1.0",
-        "dunglas/angular-csrf-bundle": "dev-master",
-        "sp/bower-bundle": "0.12.*@dev",
-        "incenteev/composer-parameter-handler": "~2.1@dev"
+        "dunglas/angular-csrf-bundle": "0.1.*",
+        "sp/bower-bundle": "0.11.*",
+        "incenteev/composer-parameter-handler": "~2.1"
+
     },
     "conflict": {
         "symfony/routing": "2.4.1"
@@ -52,7 +52,7 @@
     "config": {
         "bin-dir": "bin"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "extra": {
         "incenteev-parameters": {
             "file": "app/config/parameters.yml",
