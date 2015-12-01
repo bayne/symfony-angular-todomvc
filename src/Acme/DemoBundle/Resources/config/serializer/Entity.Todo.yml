@@ -25,7 +25,7 @@ Acme\DemoBundle\Entity\Todo:
         route: get_todo
         parameters:
           id: expr(object.getId())
-        absolute: true
+        absolute: false
     -
       rel: expr(object.getAssociatedEventsRel())
       embed:
