@@ -11,7 +11,6 @@ Install
 Follow the same instructions as found on the Github page for the [symfony-rest-edition](https://github.com/gimler/symfony-rest-edition)
 
 Essentially:
-
 ```bash
 $ composer.phar install
 ```
@@ -37,6 +36,12 @@ $ php app/console server:run localhost:8080
 
 Navigate your browser to the TodoMVC client
 
+First, you have to install bower dependancies (front-end) :
+```bash
+$ bower install
+```
+
+Then to see the result :
 ```bash
 http://localhost:8080/todo
 ```
