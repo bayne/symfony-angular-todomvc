@@ -11,6 +11,7 @@
     "todomvc"
   ],
   "success_url": "/todo",
+  "stack": "heroku-16",
   "env": {
     "BUILDPACK_URL": "https://github.com/CHH/heroku-buildpack-php"
   }
